@@ -19,97 +19,20 @@
 
     a {
       text-decoration: none;
-
     }
 
     a:hover {
       color: red;
     }
 
-    .bg-check {
-      background-color: gray;
+    .color1 {
+      background-color: black;
     }
-
-    .rel {
-      position: relative;
-    }
-
-    .abs {
-      position: absolute;
-    }
-
-    .d-flex {
-      display: flex;
-    }
-
-    .jcb {
-      justify-content: space-between;
-    }
-
-    .aic {
-      align-items: center;
-    }
-
-    .ofh {
-      overflow: hidden;
-    }
-
-    .h-0 {
-      height: 0;
-    }
-
-    .h100 {
-      height: 100px;
-    }
-
-    .h300 {
-      height: 300px;
-    }
-
-    .h200 {
-      height: 200px;
-    }
-
-    .w-100 {
-      width: 100%;
-    }
-
-    .w1200 {
-      width: 1200px;
-    }
-
-    .container {
-      width: 1200px;
-      margin: 0 auto;
-    }
-
-    .tricolor-wrapper {
-      width: 3600px;
-    }
-
-    .red {
-      background-color: red;
-    }
-
-    .yellow {
+    .color2 {
       background-color: yellow;
     }
-
-    .green {
-      background-color: green;
-    }
-
-
-
-    .fade .tricolor-slide {
-      opacity: 0;
-      transition: 0.5s;
-    }
-
-    .fade .tricolor-slide.on {
-      opacity: 1;
-      z-index: 1000;
-
+    .color3 {
+      background-color: red;
     }
 
     .tricolor-slide a {
@@ -127,34 +50,42 @@
 
     .tricolor{
       width: 1200px;
+      height: 200px;
       margin: 0 auto;
     }
-    .tricolor.vertical {
+    .tricolor.fade .tricolor-slide{
+      position: absolute;
+      width: 1200px;
       height: 200px;
-      overflow: hidden;
+    }
+    .tricolor-silde{
+      width: 1200px;
+      height: 200px;
+    }
+    .tricolor-wrapper {
+      width: 3600px;
     }
     .tricolor.fade .tricolor-wrapper{
-      height: 200px;
       position: relative;
     }
-    .tricolor.fade .tricolor-wrapper .tricolor-slide{
-      /* height: 300px; */
-      /* height: 1200px; */
+    .tricolor.fade .tricolor-slide {
+      opacity: 0;
+      transition: 0.5s;
+    }
+    .tricolor.fade .tricolor-slide.on {
+      opacity: 1;
+      z-index: 9;
+    }
+    .tricolor.vertical {
+      overflow: hidden;
     }
     .tricolor.horizontal {
       overflow: hidden;
     }
     .tricolor.horizontal .tricolor-wrapper{
       display: flex;
-      height: 200px;
     }
-    .tricolor.fade .tricolor-wrapper .tricolor-slide{
-      position: absolute;
-    }
-    .tricolor.vertical .tricolor-silde{
-      height: 200px;
-      width: 1200px;
-    }
+
 
   </style>
 </head>
@@ -162,21 +93,21 @@
 <body>
   <div class="tricolor tricolor-first vertical">
     <div class="tricolor-wrapper">
-      <div class="tricolor-silde red"></div>
-      <div class="tricolor-silde yellow"></div>
-      <div class="tricolor-silde green"></div>
+      <div class="tricolor-silde color1"></div>
+      <div class="tricolor-silde color2"></div>
+      <div class="tricolor-silde color3"></div>
     </div>
   </div>
 
   <div class="tricolor tricolor-second fade ">
     <div class="tricolor-wrapper">
-      <div class="tricolor-slide h200 w1200 on red">
+      <div class="tricolor-slide on color1">
         <a href="http://www.naver.com" target="_blank">Naver</a>
       </div>
-      <div class="tricolor-slide h200 w1200 yellow">
+      <div class="tricolor-slide color2">
         <a href="http://www.daum.net" target="_blank">Daum</a>
       </div>
-      <div class="tricolor-slide h200 w1200 green">
+      <div class="tricolor-slide color3">
         <a href="http://www.google.com" target="_blank">Google</a>
       </div>
     </div>
@@ -184,9 +115,9 @@
 
   <div class="tricolor tricolor-third horizontal">
     <div class="tricolor-wrapper">
-      <div class="tricolor-silde red h200 w1200"></div>
-      <div class="tricolor-silde yellow h200 w1200"></div>
-      <div class="tricolor-silde green h200 w1200"></div>
+      <div class="tricolor-silde color1"></div>
+      <div class="tricolor-silde color2"></div>
+      <div class="tricolor-silde color3"></div>
     </div>
   </div>
   
@@ -217,21 +148,23 @@
           $(`${selectTag} .tricolor-silde`).eq(0).appendTo($(`${selectTag} .tricolor-wrapper`))
           $(`${selectTag} .tricolor-wrapper`).css("marginLeft", 0)
         })
-      }
-
-     
+      }     
       
       setInterval(function() {
         verticalSilde('.tricolor-first',200)
-      }, 2500)
+      }, 1500)
 
       setInterval(function() {
         fadeSilde('.tricolor-second')
-      }, 2000)
+      }, 2500)
 
       setInterval(function() {
         horizontalSilde('.tricolor-third',1200)
-      }, 3000)
+      }, 2000)
+
+      /* $('.tricolor-slide').eq(0).css('backgroundColor','red')
+      $('.tricolor-slide').eq(1).css('backgroundColor','white')
+      $('.tricolor-slide').eq(2).css('backgroundColor','blue') */
 
     })
   </script>
