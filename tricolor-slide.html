@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tricolor Silde</title>
+  <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+
+    }
+
+    a:hover {
+      color: red;
+    }
+
+    .bg-check {
+      background-color: gray;
+    }
+
+    .rel {
+      position: relative;
+    }
+
+    .abs {
+      position: absolute;
+    }
+
+    .d-flex {
+      display: flex;
+    }
+
+    .jcb {
+      justify-content: space-between;
+    }
+
+    .aic {
+      align-items: center;
+    }
+
+    .ofh {
+      overflow: hidden;
+    }
+
+    .h-0 {
+      height: 0;
+    }
+
+    .h100 {
+      height: 100px;
+    }
+
+    .h300 {
+      height: 300px;
+    }
+
+    .h200 {
+      height: 200px;
+    }
+
+    .w-100 {
+      width: 100%;
+    }
+
+    .w1200 {
+      width: 1200px;
+    }
+
+    .container {
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tricolor-wrapper {
+      width: 3600px;
+    }
+
+    .red {
+      background-color: red;
+    }
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+
+
+    .fade .tricolor-slide {
+      opacity: 0;
+      transition: 0.5s;
+    }
+
+    .fade .tricolor-slide.on {
+      opacity: 1;
+      z-index: 1000;
+
+    }
+
+    .tricolor-slide a {
+      z-index: 10000;
+      display: flex;
+      height: 100%;
+      /* rel에 %가 먹히는 순간은 엄마 높이가 지정되어있으면 됨 */
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      font-size: 200px;
+      line-height: 30px;
+
+    }
+
+    .tricolor{
+      width: 1200px;
+      margin: 0 auto;
+    }
+    .tricolor.vertical {
+      height: 200px;
+      overflow: hidden;
+    }
+    .tricolor.fade .tricolor-wrapper{
+      height: 200px;
+      position: relative;
+    }
+    .tricolor.fade .tricolor-wrapper .tricolor-slide{
+      /* height: 300px; */
+      /* height: 1200px; */
+    }
+    .tricolor.horizontal {
+      overflow: hidden;
+    }
+    .tricolor.horizontal .tricolor-wrapper{
+      display: flex;
+      height: 200px;
+    }
+    .tricolor.fade .tricolor-wrapper .tricolor-slide{
+      position: absolute;
+    }
+    .tricolor.vertical .tricolor-silde{
+      height: 200px;
+      width: 1200px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="tricolor tricolor-first vertical">
+    <div class="tricolor-wrapper">
+      <div class="tricolor-silde red"></div>
+      <div class="tricolor-silde yellow"></div>
+      <div class="tricolor-silde green"></div>
+    </div>
+  </div>
+
+  <div class="tricolor tricolor-second fade ">
+    <div class="tricolor-wrapper">
+      <div class="tricolor-slide h200 w1200 on red">
+        <a href="http://www.naver.com" target="_blank">Naver</a>
+      </div>
+      <div class="tricolor-slide h200 w1200 yellow">
+        <a href="http://www.daum.net" target="_blank">Daum</a>
+      </div>
+      <div class="tricolor-slide h200 w1200 green">
+        <a href="http://www.google.com" target="_blank">Google</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="tricolor tricolor-third horizontal">
+    <div class="tricolor-wrapper">
+      <div class="tricolor-silde red h200 w1200"></div>
+      <div class="tricolor-silde yellow h200 w1200"></div>
+      <div class="tricolor-silde green h200 w1200"></div>
+    </div>
+  </div>
+  
+  <script>
+    $(document).ready(function () {
+
+      function verticalSilde(selectTag, moveUnit) {
+        $(`${selectTag} .tricolor-wrapper`).animate({
+          "marginTop": -moveUnit
+        }, 300, function () {
+          $(`${selectTag} .tricolor-silde`).eq(0).appendTo($(`${selectTag} .tricolor-wrapper`))
+          $(`${selectTag} .tricolor-wrapper`).css("marginTop", 0)
+        })
+      }
+
+      var count = 0;
+      function fadeSilde(selectTag) {
+        count++;
+        count %= $(`${selectTag} .tricolor-slide`).length;
+        $(`${selectTag} .tricolor-slide`).eq(count).addClass("on").siblings().removeClass("on")
+      }
+
+
+      function horizontalSilde(selectTag, moveUnit) {
+        $(`${selectTag} .tricolor-wrapper`).animate({
+          "marginLeft": -moveUnit
+        }, 300, function () {
+          $(`${selectTag} .tricolor-silde`).eq(0).appendTo($(`${selectTag} .tricolor-wrapper`))
+          $(`${selectTag} .tricolor-wrapper`).css("marginLeft", 0)
+        })
+      }
+
+     
+      
+      setInterval(function() {
+        verticalSilde('.tricolor-first',200)
+      }, 2500)
+
+      setInterval(function() {
+        fadeSilde('.tricolor-second')
+      }, 2000)
+
+      setInterval(function() {
+        horizontalSilde('.tricolor-third',1200)
+      }, 3000)
+
+    })
+  </script>
+</body>
+
+</html>
